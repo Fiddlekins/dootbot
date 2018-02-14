@@ -14,14 +14,14 @@ const setTimeoutPromise = util.promisify(setTimeout);
 
 class Dootbot {
 	constructor(token) {
-		this.client = new Discord.Client();
+		this._client = new Discord.Client();
 		this._voiceConnections = new Map();
 
-		this.client.on('ready', this._onReady.bind(this));
+		this._client.on('ready', this._onReady.bind(this));
 
-		this.client.on('message', this._onMessage.bind(this));
+		this._client.on('message', this._onMessage.bind(this));
 
-		this.client.login(token).catch(console.error);
+		this._client.login(token).catch(console.error);
 	}
 
 	_onReady() {
@@ -53,6 +53,7 @@ class Dootbot {
 		const voiceConnection = await member.voiceChannel.join();
 		this._voiceConnections.set(member.voiceChannelID, voiceConnection);
 		while (this._voiceConnections.get(member.voiceChannelID)) {
+			console.log(`Dooting in ${member.voiceChannelID}`);
 			const dispatcher = voiceConnection.playFile(DOOT_PATH);
 			dispatcher.setVolume(0.3);
 			await setTimeoutPromise(DOOT_INTERVAL);
