@@ -7,7 +7,7 @@ const Discord = require('discord.js');
 
 const TOKEN = fs.readFileSync('token', 'utf8').trim();
 const DOOT_PATH = path.join('doot.mp3');
-const DOOT_INTERVAL = 3000;
+const DOOT_INTERVAL = 5000;
 const COMMAND_PREFIX = '/';
 
 const setTimeoutPromise = util.promisify(setTimeout);
@@ -48,6 +48,9 @@ class Dootbot {
 		}
 		if (!member.voiceChannel) {
 			await message.reply('get in a VC to doot!');
+			return;
+		}
+		if (this._voiceConnections.get(member.voiceChannelID)) {
 			return;
 		}
 		const voiceConnection = await member.voiceChannel.join();
