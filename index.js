@@ -50,13 +50,14 @@ class Dootbot {
 			await message.reply('get in a VC to doot!');
 			return;
 		}
-		if (this._voiceConnections.get(member.voiceChannelID)) {
+		const voiceChannelID = member.voiceChannelID;
+		if (this._voiceConnections.get(voiceChannelID)) {
 			return;
 		}
 		const voiceConnection = await member.voiceChannel.join();
-		this._voiceConnections.set(member.voiceChannelID, voiceConnection);
-		while (this._voiceConnections.get(member.voiceChannelID)) {
-			console.log(`Dooting in ${member.voiceChannelID}`);
+		this._voiceConnections.set(voiceChannelID, voiceConnection);
+		while (this._voiceConnections.get(voiceChannelID)) {
+			console.log(`Dooting in ${voiceChannelID}`);
 			const dispatcher = voiceConnection.playFile(DOOT_PATH);
 			dispatcher.setVolume(0.3);
 			await setTimeoutPromise(DOOT_INTERVAL);
