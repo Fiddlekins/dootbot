@@ -1,0 +1,23 @@
+{
+  "name": "dootbot",
+  "version": "1.0.0",
+  "description": "It doots",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fiddlekins/dootbot.git"
+  },
+  "author": "Fiddlekins",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fiddlekins/dootbot/issues"
+  },
+  "homepage": "https://github.com/Fiddlekins/dootbot#readme",
+  "dependencies": {
+    "discord.js": "^11.3.0",
+    "node-opus": "^0.2.7"
+  }
+}
